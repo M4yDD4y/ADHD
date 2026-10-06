@@ -1,5 +1,5 @@
 default:
-  enabled: true
+  enabled: false
   single: true
   displayName: КНБ
   description: Предугадайте ход своего противника! Выберите в хот-баре свой вариант (камень/ножницы/бумага).

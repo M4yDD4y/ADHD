@@ -29,7 +29,8 @@ object ADHDConfig {
         Pair("Pillars", PillarsModeMetaLoader()),
         Pair("RPS", null),
         Pair("Memory", null),
-        Pair("Casino", CasinoModeMetaLoader())
+        Pair("Casino", CasinoModeMetaLoader()),
+        Pair("Overtake", null)
     )
 
     val singleModeNames = mutableSetOf<String>()

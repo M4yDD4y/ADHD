@@ -159,13 +159,16 @@ object TournamentManager {
 
         var used = mutableSetOf<String>()
 
-        for (i in 0..<ceil(2 * ADHDConfig.pointsGoal - 1).toInt()) {
-            val name = (names - used).randomOrNull() ?: (names - mutableSetOf(pool[pool.size - 1])).random()
+        //for (i in 0..<ceil(2 * ADHDConfig.pointsGoal - 1).toInt()) {
+        //    val name = (names - used).randomOrNull() ?: (names - mutableSetOf(pool[pool.size - 1])).random()
 
-            if (names.size == used.size) used = mutableSetOf(name)
+        //    if (names.size == used.size) used = mutableSetOf(name)
 
-            used.add(name)
+        //    used.add(name)
 
+        //    pool.add(name)
+        //}
+        for (name in names) {
             pool.add(name)
         }
 

@@ -1,5 +1,5 @@
 default:
-  enabled: true
+  enabled: false
   duration: 120
   displayName: ПВП
   description: Убейте своего противника!

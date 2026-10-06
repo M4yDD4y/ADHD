@@ -1,5 +1,5 @@
 default:
-  enabled: true
+  enabled: false
   single: true
   displayName: Память
   description: Запомните последовательность стендов и ударьте по ним в том же порядке! ЛКМ по стенду для выбора.

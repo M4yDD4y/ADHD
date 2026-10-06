@@ -1,5 +1,5 @@
 default:
-  enabled: true
+  enabled: false
   duration: 120
   displayName: Столбы удачи
   description: Получай случайные предметы и убей своего противника, пока вы оба стоите на двух столбах!

@@ -20,6 +20,7 @@ import ru.joutak.adhd.game.concrete.PVPGame
 import ru.joutak.adhd.game.concrete.PillarsGame
 import ru.joutak.adhd.game.concrete.RPSGame
 import ru.joutak.adhd.game.concrete.SnipersGame
+import ru.joutak.adhd.game.concrete.OvertakeGame
 import ru.joutak.adhd.listener.ArenaSwitchListener
 import ru.joutak.adhd.listener.KeepInventoryListener
 import ru.joutak.adhd.ui.GameScoreboardManager
@@ -340,6 +341,7 @@ class Tournament(
                     "Pillars" -> PillarsGame()
                     "Knights" -> KnightsGame()
                     "Snipers" -> SnipersGame()
+                    "Overtake" -> OvertakeGame()
                     else -> error("No such mode...")
                 }
 
