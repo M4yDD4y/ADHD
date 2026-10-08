@@ -1,7 +1,7 @@
 default:
   maxPlayers: 4
   pointsGoal: 10.0
-  templateWorldName: template
+  templateWorldName: adhd_a
   lobbyWorld: lobby
 
 ceremony:
@@ -43,6 +43,12 @@ maps:
               x: 142
               y: 67
               z: 795
+      overtake:
+        center:
+          x: 256
+          y: 65
+          z: 735
+          radius: 7
     spawns:
       0:
         x: 256
@@ -50,12 +56,12 @@ maps:
         z: 725
         yaw: 0
         pitch: 0
-      1:
-        x: 256
-        y: 65.5
-        z: 745
-        yaw: 180
-        pitch: 0
+      #1:
+      #  x: 256
+      #  y: 65.5
+      #  z: 745
+      #  yaw: 180
+      #  pitch: 0
   2:
     meta:
       pvp:

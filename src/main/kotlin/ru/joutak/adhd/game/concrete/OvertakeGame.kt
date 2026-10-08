@@ -1,5 +1,8 @@
 package ru.joutak.adhd.game.concrete
 
+import org.bukkit.Bukkit
+import org.bukkit.Location
+import org.bukkit.entity.Player
 import ru.joutak.adhd.game.Game
 import ru.joutak.adhd.game.GameState
 import ru.joutak.adhd.game.mode.meta.ModeMeta
@@ -20,15 +23,32 @@ class OvertakeGame : Game() {
 
     val result = mutableMapOf<UUID, Double>()
 
-    lateinit var points: List<SpawnPoint>
-
     override fun start(
         worldName: String, 
         arena: Arena, 
         members: Set<UUID>, 
         modeMeta: ModeMeta?
     ) {
-        TODO("Not yet implemented")
+        this.worldName = worldName
+        this.arena = arena
+        this.members = members
+
+        for (uuid in members) {
+            val player = Bukkit.getPlayer(uuid) ?: continue
+
+            teleportToSpawn(player)
+        }
+
+        state = GameState.RUN
+    }
+
+    fun teleportToSpawn(player: Player) {
+        val world = Bukkit.getWorld(worldName)!!
+
+        val spawn = arena.spawnPoints.random()
+
+        player.teleport(Location(Bukkit.getWorld(worldName)!!,
+            spawn.x, spawn.y, spawn.z, spawn.yaw, spawn.pitch))
     }
 
     override fun update() {

@@ -1,7 +1,8 @@
 default:
   enabled: true
+  single: true
   duration: 120
   displayName: Царь горы
   description: Пока что здесь ничего нет
   maps:
-    - 3
+    - 1
