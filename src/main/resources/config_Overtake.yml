@@ -1,8 +1,13 @@
 default:
   enabled: true
   single: true
-  duration: 120
+  duration: 90
   displayName: Царь горы
   description: Пока что здесь ничего нет
   maps:
     - 1
+
+meta:
+  points_to_win: 100
+  points_per_second: 5
+  knockback_multiplier: 1.2
