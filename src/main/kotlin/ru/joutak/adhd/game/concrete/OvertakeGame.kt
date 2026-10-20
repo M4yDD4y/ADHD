@@ -1,5 +1,8 @@
 package ru.joutak.adhd.game.concrete
 
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.title.Title
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.GameRules
@@ -16,6 +19,7 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import ru.joutak.adhd.ADHDPlugin
+import ru.joutak.adhd.config.ADHDConfig
 import ru.joutak.adhd.config.map.meta.concrete.OvertakeMapMeta
 import ru.joutak.adhd.game.Game
 import ru.joutak.adhd.game.GameState
@@ -51,6 +55,8 @@ class OvertakeGame : Game() {
 
     var ticks = 0
 
+    var pointer = 0.0
+
     override fun start(
         worldName: String, 
         arena: Arena, 
@@ -65,8 +71,13 @@ class OvertakeGame : Game() {
         val world = Bukkit.getWorld(worldName)!!
         world.setGameRule(GameRules.FALL_DAMAGE, false)
 
+        val baseX = ADHDConfig.configMaps[1]!!.spawnPoints[0].x
+        pointer = floor((arena.spawnPoints[0].x - baseX) / 512)
+
         for (corner in calculateCorners()) {
             val loc = Location(world, corner.first, corner.second, corner.third)
+            loc.chunk.addPluginChunkTicket(ADHDPlugin.instance)
+
             val stand = world.spawn(loc, ArmorStand::class.java)
             stand.isVisible = false
             stand.setGravity(false)
@@ -149,7 +160,6 @@ class OvertakeGame : Game() {
     }
 
     fun calculateCorners(): List<Triple<Double, Double, Double>> {
-        val pointer = floor(arena.spawnPoints[0].x / 512)
         val mapMeta = arena.metas["overtake"] as OvertakeMapMeta
         val corner1 = Triple(mapMeta.center.x + 512 * pointer + mapMeta.radius,
             mapMeta.center.y, mapMeta.center.z + mapMeta.radius)
@@ -178,17 +188,6 @@ class OvertakeGame : Game() {
                 finish()
             }
         }
-        when (currentPlayers.size) {
-            0 -> armorStands.forEach { stand ->
-                stand.equipment.setHelmet(ItemStack(Material.GREEN_CONCRETE))
-            }
-            1 -> armorStands.forEach { stand ->
-                stand.equipment.setHelmet(ItemStack(Material.RED_CONCRETE))
-            }
-            2 -> armorStands.forEach { stand ->
-                stand.equipment.setHelmet(ItemStack(Material.BLUE_CONCRETE))
-            }
-        }
     }
 
     override fun getGameState(): GameState {
@@ -202,10 +201,19 @@ class OvertakeGame : Game() {
             player.inventory.clear()
             bossBars[uuid]!!.removeAll()
             bossBars.remove(uuid)
+
+            if (result.containsKey(uuid)) {
+                player.showTitle(Title.title(Component.text("Победа!").color(NamedTextColor.GREEN),
+                    Component.text("Вы удержали точку!").color(NamedTextColor.GREEN)))
+            } else {
+                player.showTitle(Title.title(Component.text("Поражение...").color(NamedTextColor.RED),
+                    Component.text("Вы не смогли удержать точку.").color(NamedTextColor.RED)))
+            }
         }
-        for (stand in armorStands) {
+        armorStands.forEach { stand ->
             stand.remove()
         }
+        armorStands.clear()
         val world = Bukkit.getWorld(worldName)!!
         world.setGameRule(GameRules.FALL_DAMAGE, true)
 
