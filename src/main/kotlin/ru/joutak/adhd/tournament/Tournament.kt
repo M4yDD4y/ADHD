@@ -277,7 +277,6 @@ class Tournament(
                     "RPS" -> RPSGame()
                     "Casino" -> CasinoGame()
                     "Memory" -> MemoryGame()
-                    "Overtake" -> OvertakeGame()
                     else -> error("No such single mode...")
                 }
 

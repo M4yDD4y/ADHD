@@ -1,5 +1,5 @@
 default:
-  enabled: false
+  enabled: true
   single: true
   displayName: Казино
   description: Выиграй все деньги в рулетке. Введи в чат свою ставку (красное/черное/зеленое <сумма ставки>).

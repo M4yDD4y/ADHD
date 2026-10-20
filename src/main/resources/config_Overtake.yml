@@ -1,6 +1,5 @@
 default:
   enabled: true
-  single: true
   duration: 90
   displayName: Царь горы
   description: Вытолкните противника из зоны захвата и займите ее сами!

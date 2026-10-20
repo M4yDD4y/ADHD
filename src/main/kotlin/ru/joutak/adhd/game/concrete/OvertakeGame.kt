@@ -117,13 +117,11 @@ class OvertakeGame : Game() {
                 BarStyle.SEGMENTED_20
             )
             bossbar.progress = 0.0
+            members.forEach { id -> bossbar.addPlayer(Bukkit.getPlayer(id)!!) }
             bossBars[uuid] = bossbar
             teleportToSpawn(player)
             player.gameMode = GameMode.ADVENTURE
             giveStick(player)
-        }
-        for (uuid in members) {
-            members.forEach { id -> bossBars[uuid]!!.addPlayer(Bukkit.getPlayer(id)!!) }
         }
 
         state = GameState.RUN
